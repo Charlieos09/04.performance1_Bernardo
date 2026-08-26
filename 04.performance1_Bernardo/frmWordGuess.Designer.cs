@@ -32,9 +32,11 @@
             Title = new Label();
             Wordle = new Label();
             wrongGroup = new GroupBox();
+            lbWrongGuesses = new ListBox();
             wrongTitle = new Label();
             guessBox = new TextBox();
             Confirm = new Button();
+            wrongGroup.SuspendLayout();
             SuspendLayout();
             // 
             // backgroundBox
@@ -51,11 +53,11 @@
             // 
             Title.AutoSize = true;
             Title.BackColor = Color.Khaki;
-            Title.Font = new Font("Ravie", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Title.Font = new Font("Microsoft Sans Serif", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Title.ForeColor = Color.Black;
-            Title.Location = new Point(58, 48);
+            Title.Location = new Point(116, 44);
             Title.Name = "Title";
-            Title.Size = new Size(353, 43);
+            Title.Size = new Size(249, 37);
             Title.TabIndex = 1;
             Title.Text = "Guess the Word";
             Title.Click += label1_Click;
@@ -64,10 +66,10 @@
             // 
             Wordle.AutoSize = true;
             Wordle.BackColor = Color.DarkSeaGreen;
-            Wordle.Font = new Font("Bauhaus 93", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Wordle.Font = new Font("Microsoft Sans Serif", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Wordle.Location = new Point(172, 140);
             Wordle.Name = "Wordle";
-            Wordle.Size = new Size(121, 36);
+            Wordle.Size = new Size(125, 37);
             Wordle.TabIndex = 2;
             Wordle.Text = "Wordle";
             Wordle.Click += Wordle_Click;
@@ -75,21 +77,31 @@
             // wrongGroup
             // 
             wrongGroup.BackColor = SystemColors.InactiveBorder;
+            wrongGroup.Controls.Add(lbWrongGuesses);
             wrongGroup.Location = new Point(598, 140);
             wrongGroup.Name = "wrongGroup";
             wrongGroup.Size = new Size(230, 154);
             wrongGroup.TabIndex = 3;
             wrongGroup.TabStop = false;
             // 
+            // lbWrongGuesses
+            // 
+            lbWrongGuesses.FormattingEnabled = true;
+            lbWrongGuesses.ItemHeight = 15;
+            lbWrongGuesses.Location = new Point(6, 12);
+            lbWrongGuesses.Name = "lbWrongGuesses";
+            lbWrongGuesses.Size = new Size(218, 124);
+            lbWrongGuesses.TabIndex = 0;
+            // 
             // wrongTitle
             // 
             wrongTitle.AutoSize = true;
             wrongTitle.BackColor = Color.Khaki;
-            wrongTitle.Font = new Font("Ravie", 20F);
+            wrongTitle.Font = new Font("Microsoft Sans Serif", 20F);
             wrongTitle.ForeColor = Color.Black;
-            wrongTitle.Location = new Point(522, 94);
+            wrongTitle.Location = new Point(582, 94);
             wrongTitle.Name = "wrongTitle";
-            wrongTitle.Size = new Size(385, 36);
+            wrongTitle.Size = new Size(262, 31);
             wrongTitle.TabIndex = 4;
             wrongTitle.Text = "Wrong Answers only";
             wrongTitle.Click += Title2_Click;
@@ -131,16 +143,36 @@
             Controls.Add(backgroundBox);
             Name = "frmWordGuess";
             Text = "WordGuessr";
+            wrongGroup.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is frmWordGuess guess &&
+                   EqualityComparer<Label>.Default.Equals(Wordle, guess.Wordle);
         }
 
         #endregion
 
         private TextBox backgroundBox;
+
+        public frmWordGuess(TextBox backgroundBox)
+        {
+            this.backgroundBox = backgroundBox;
+        }
+
         private Label Title;
+
+        public frmWordGuess(Label title)
+        {
+            Title = title;
+        }
+
         private Label Wordle;
         private GroupBox wrongGroup;
+        private ListBox lbWrongGuesses;
         private Label wrongTitle;
         private TextBox guessBox;
 
